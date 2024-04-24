@@ -30,3 +30,4 @@ Route::get('/users/{user}', [UserController::class, 'show']);
 //Invoices
 Route::get('/invoices', [InvoiceController::class, 'index']);
 Route::get('/invoices/{invoice}', [InvoiceController::class, 'show']);
+Route::post('/invoices', [InvoiceController::class, 'store']);

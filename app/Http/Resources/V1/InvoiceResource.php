@@ -8,11 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class InvoiceResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
+    private array $types = ['C' => 'Cartão', 'B' => 'Boleto', 'P' => 'Pix'];
+
     public function toArray(Request $request): array
     {
         $paid = $this->paid;
@@ -26,8 +23,8 @@ class InvoiceResource extends JsonResource
             'type' => $this->types[$this->type],
             'value' => 'R$ ' . number_format($this->value, 2, ',', '.'),
             'paid' => $paid ? 'Pago' : 'Não Pago',
-            'paymentDate' => $paid ? Carbon::parse($this->payment_date)->format('d/m/Y H:i:s') : null,
-            'paymentSince' => $paid ? Carbon::parse($this->payment_date)->diffForHumans() : null,
+            'paymentDate' => $paid ? Carbon::parse($this->payment_date)->format('d/m/Y H:i:s') : Null,
+            'paymentSince' => $paid ? Carbon::parse($this->payment_date)->diffForHumans() : Null,
         ];
     }
 }
