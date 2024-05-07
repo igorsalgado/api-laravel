@@ -16,6 +16,12 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum', 'abilities:invoice-store,user-update'])->only(['store', 'update']);
+    }
+
     public function index(Request $request)
     {
         // return InvoiceResource::collection(Invoice::where([
@@ -34,6 +40,7 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'type' => 'required|max:1',
